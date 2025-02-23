@@ -19,6 +19,11 @@ price_df = pd.read_csv("https://raw.githubusercontent.com/keyrouter132/carsales/
 def home():
     return jsonify({'message': 'Flask API is working on Render!'})
 
+@app.route('/get_data', methods=['GET'])
+def get_data():
+    data = df.to_dict(orient='records')  # Convert DataFrame to JSON
+    return jsonify(data)
+
 # Define the API route for analysis
 @app.route('/analyze', methods=['POST'])
 def analyze():
