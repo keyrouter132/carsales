@@ -2,12 +2,12 @@ from flask import Flask, request, jsonify
 import matplotlib.pyplot as plt
 import seaborn as sns #adjust the styling
 import pandas as pd
-
+from flask_cors import CORS
 import logging
 
 # Initialize the Flask app
 app = Flask(__name__)
-
+CORS(app)  # Enable CORS to allow Flutter requests
 # Set up logging
 logging.basicConfig(level=logging.DEBUG)
 
@@ -15,6 +15,9 @@ logging.basicConfig(level=logging.DEBUG)
 car_df = pd.read_csv("https://raw.githubusercontent.com/keyrouter132/carsales/main/car_details_df.csv")
 price_df = pd.read_csv("https://raw.githubusercontent.com/keyrouter132/carsales/main/price_cardetails_df.csv")
 
+@app.route('/')
+def home():
+    return jsonify({'message': 'Flask API is working on Render!'})
 
 # Define the API route for analysis
 @app.route('/analyze', methods=['POST'])
