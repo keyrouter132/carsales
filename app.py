@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify
 import matplotlib.pyplot as plt
 import seaborn as sns #adjust the styling
 import pandas as pd
-import pandas as pd
+
 import logging
 
 # Initialize the Flask app
@@ -10,6 +10,11 @@ app = Flask(__name__)
 
 # Set up logging
 logging.basicConfig(level=logging.DEBUG)
+
+# Load CSV files from GitHub URL
+car_df = pd.read_csv("https://raw.githubusercontent.com/keyrouter132/carsales/main/car_details_df.csv")
+price_df = pd.read_csv("https://raw.githubusercontent.com/keyrouter132/carsales/main/price_cardetails_df.csv")
+
 
 # Define the API route for analysis
 @app.route('/analyze', methods=['POST'])
